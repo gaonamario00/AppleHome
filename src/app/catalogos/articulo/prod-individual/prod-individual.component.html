@@ -1,0 +1,43 @@
+<div>
+  <h2></h2>
+  <h2>Información del Producto</h2>
+  <form [formGroup]="prodIndividualForms" (ngSubmit)="guardarProdIndividual()">
+    <div>
+      <label for="nombreInd">Nombre:</label>
+      <input id="nombreInd" formControlName="nombreInd" required>
+    </div>
+    <div>
+      <label for="precioInd">Precio:</label>
+      <input id="precioInd" formControlName="precioInd" required>
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <div *ngIf="productosInd.length > 0">
+    <h2></h2>
+    <h2>Productos Conjuntos</h2>
+    <table class="productos-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Iterar sobre la lista de productos -->
+        <tr *ngFor="let p of productosInd">
+          <td>{{ p.Nombre }}</td>
+          <td>{{ p.PrecioTotal }}</td>
+          <td>
+            <!-- Botón para editar 
+            <a class="btn-editar" (click)="editarProdIndSelect(p)">Editar</a>
+            -->
+            <!-- Botón para eliminar -->
+            <a class="btn-eliminar" (click)="eliminarProducto(p.id)">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>

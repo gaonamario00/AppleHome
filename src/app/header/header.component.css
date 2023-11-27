@@ -1,0 +1,24 @@
+/* header.component.css */
+
+header {
+    padding: 10px;
+    background-color: #f8f9fa; /* Color de fondo */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+  }
+
+  .img-home-svg {
+    width: 80px;
+    height: 80px;
+  }
+  

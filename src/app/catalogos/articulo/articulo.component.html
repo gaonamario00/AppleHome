@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleccione el Tipo de Producto</title>
+</head>
+<body>
+    <h5></h5>
+    <h5></h5>
+    <h5>Seleccione el Tipo de Producto</h5>
+    <h5></h5>
+    <h5></h5>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input (click)="cambioTipoProducto(1)" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-primary btn-lg" for="btnradio1">Producto Individual</label>
+        
+        <input (click)="cambioTipoProducto(2)" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary btn-lg" for="btnradio2">Producto Conjunto</label>
+    </div>
+
+    <div *ngIf="prodIndividual">
+        <app-prod-individual></app-prod-individual>
+    </div>
+    
+    <div *ngIf="!prodIndividual">
+        <app-prod-conjunto></app-prod-conjunto>
+    </div>
+    
+  </body>
+</html>

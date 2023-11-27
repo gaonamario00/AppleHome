@@ -1,0 +1,60 @@
+<div>
+    <h2>Información del Producto</h2>
+    <form [formGroup]="prodConjuntoForms">
+      <div>
+        <label for="nombreInd">Nombre:</label>
+        <input id="nombreInd" formControlName="nombreConj" required>
+      </div>
+      <div>
+        <label for="precioInd">Precio Total:</label>
+        <input id="precioInd" formControlName="precioConj" required>
+      </div>
+      <div>
+        <label for="productoSeleccionado">Seleccionar Producto:</label>
+        <select id="productoSeleccionado" formControlName="productoSeleccionado">
+            <option value="" disabled selected>Seleccione un artículo</option>
+          <option *ngFor="let p of productosInd" [value]="p.NombreArticulo">{{ p.NombreArticulo }}</option>
+        </select>
+        <div>
+            <label for="cantidadInd">Cantidad: </label>
+            <input id="cantidadInd" style="width: 100px;" formControlName="cantidadInd">
+            <button class="btn plus" (click)="agregarProductoAListaPre()">Añadir +</button>
+        </div>
+      </div>
+      <div *ngIf="productosIndPre.length > 0">
+        <div *ngFor="let p of productosIndPre">
+          <p>{{p.NombreArticulo }} | Cant: {{p.Cantidad}} | Quitar</p>
+        </div>
+      </div>
+      <button type="submit" (click)="guardarProductoConj()">Guardar</button>
+    </form>
+
+    <div *ngIf="productosConj.length > 0">
+    <h2></h2>
+    <h2>Productos Conjuntos</h2>
+    <table class="productos-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Iterar sobre la lista de productos -->
+        <tr *ngFor="let p of productosConj">
+          <td>{{ p.Nombre }}</td>
+          <td>{{ p.PrecioTotal }}</td>
+          <td>
+            <!-- Botón para editar -->
+            <a class="btn-editar">Editar</a>
+            
+            <!-- Botón para eliminar -->
+            <a class="btn-eliminar">Eliminar</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  

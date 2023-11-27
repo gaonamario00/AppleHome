@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'AppleHomeERP' title`, () => {
+  it(`should have the 'AppleHome' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('AppleHomeERP');
+    expect(app.title).toEqual('AppleHome');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, AppleHomeERP');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, AppleHome');
   });
 });

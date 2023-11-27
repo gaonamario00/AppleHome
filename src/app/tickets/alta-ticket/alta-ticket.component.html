@@ -1,0 +1,11 @@
+<div>
+    <h2>Crear un nuevo ticket</h2>
+    <label>Descripción:</label>
+    <input [(ngModel)]="nuevoTicket" placeholder="Ingrese la descripción del ticket">
+    <button (click)="agregarTicket()">Agregar Ticket</button>
+
+    <h3>Lista de Tickets</h3>
+    <ul>
+      <li *ngFor="let ticket of tickets">{{ ticket }}</li>
+    </ul>
+  </div>
