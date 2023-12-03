@@ -79,53 +79,68 @@ export class ReportesComponent {
   }
 
   descargarPDF() {
+    // Crear el documento PDF
     const doc = new jsPDF();
-
-    // Encabezado
-    doc.text('Reporte de Ventas', 20, 10);
-    doc.text(`Total de Ventas: $${this.totalVentas}`, 20, 20);
-
-    // Datos para la tabla
-    const rows: RowInput[] = [];
-    const headers = ['Ticket', 'Nombre Persona', 'Total', 'Fecha'];
-
+  
+    // Obtener la fecha actual
+    const fechaActual = new Date().toLocaleDateString();
+  
+    // Configurar el encabezado de la fecha
+    doc.text(`Fecha de Emisión: ${fechaActual}`, 20, 10);
+  
+    // Configurar el encabezado principal del reporte
+    doc.text('Reporte de Ventas', 20, 20);
+  
+    // Configurar datos para la tabla
+    const headers = ['Ticket', 'Nombre Persona', 'Total', 'Fecha', 'Productos'];
+    const rows: (string | number)[][] = [];
+    
     // Llenar datos de la tabla
     this.tickets.forEach((ticket, index) => {
-      if(ticket.Fechastr != undefined){
-        const rowData: RowInput = {};
-        rowData[0] = index + 1;
-        rowData[1] = ticket.NombrePersona;
-        rowData[2] = `$${ticket.Total}`;
-        rowData[3] = ticket.Fechastr;
-  
+      if(ticket.Fechastr !== undefined){
+        const rowData: (string | number)[] = [
+          index + 1,
+          ticket.NombrePersona,
+          `$${ticket.Total}`,
+          ticket.Fechastr,
+          '' // Columna de Productos inicializada con cadena vacía
+        ];
+      
         // Agregar información detallada de los productos del ticket
         ticket.Articulos.forEach((articulo, i) => {
           const producto = this.productos.find(p => p.idProd === articulo.idProducto);
           if (producto) {
-            rowData[headers.length + i] = `- ${articulo.Cantidad} x ${producto.Nombre}`;
+            rowData[4] += `- ${articulo.Cantidad} x ${producto.Nombre}\n`; // Concatenar productos
           }
         });
-  
+      
+        // Agregar la fila al arreglo de filas
         rows.push(rowData);
       }
 
     });
-
+    
+  
     // Configurar la posición y el estilo de la tabla
     const startY = 30;
     const styles: Partial<Styles> = { valign: 'middle', halign: 'center' };
-
+  
     // Agregar la tabla al documento
     autoTable(doc, {
-      head: [headers],
+      columns: headers.map(header => ({ header })),
       body: rows,
       startY,
       styles,
     });
-
+  
     // Guardar el documento PDF
     doc.save('reporte_ventas.pdf');
   }
+  
+  
+  
+  
+  
 }
 
 
