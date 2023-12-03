@@ -23,4 +23,8 @@ export class homeComponent {
         this.router.navigate(['/tickets']);
     }
 
+    navigateToReportes(){
+        this.router.navigate(['/reportes']);
+    }
+
 }

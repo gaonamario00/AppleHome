@@ -1,7 +1,7 @@
 <div>
   <h2></h2>
   <h2>Información del Producto</h2>
-  <form [formGroup]="prodIndividualForms" (ngSubmit)="guardarProdIndividual()">
+  <form [formGroup]="prodIndividualForms">
     <div>
       <label for="nombreInd">Nombre:</label>
       <input id="nombreInd" formControlName="nombreInd" required>
@@ -10,7 +10,11 @@
       <label for="precioInd">Precio:</label>
       <input id="precioInd" formControlName="precioInd" required>
     </div>
-    <button type="submit">Guardar</button>
+    <div>
+    <button type="submit" (click)="guardarProdIndividual()" >Guardar</button>
+  </div>
+  <h1></h1>
+    <a type="submit" class="btn btn-secondary" *ngIf="id != undefined" (click)="cancelarEditar()" >Cancelar Editar</a>
   </form>
 
   <div *ngIf="productosInd.length > 0">
@@ -30,9 +34,9 @@
           <td>{{ p.Nombre }}</td>
           <td>{{ p.PrecioTotal }}</td>
           <td>
-            <!-- Botón para editar 
+            <!-- Botón para editar -->
             <a class="btn-editar" (click)="editarProdIndSelect(p)">Editar</a>
-            -->
+            
             <!-- Botón para eliminar -->
             <a class="btn-eliminar" (click)="eliminarProducto(p.id)">Eliminar</a>
           </td>

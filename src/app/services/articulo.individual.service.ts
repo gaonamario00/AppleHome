@@ -40,7 +40,7 @@ export class ArticuloIndividualService{
 
     editarProductoInd(id: string, prodInd: any): Promise<any>{
         console.log("Service" + id);
-        return this.fireStore.collection('individuales').doc(id).update(prodInd);
+        return this.fireStore.collection('Individuales').doc(id).update(prodInd);
     }
 
 }

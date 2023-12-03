@@ -7,8 +7,8 @@ import { ProdIndividualComponent } from "./prod-individual/prod-individual.compo
 @Component({
     selector: 'app-articulo',
     standalone: true,
-    templateUrl: './articulo.component.html',
-    styleUrl: './articulo.component.css',
+    templateUrl: './tipo-articulo.component.html',
+    styleUrl: './tipo-articulo.component.css',
     imports: [CommonModule, ProdConjuntoComponent, ProdIndividualComponent]
 })
 export class ArticuloComponent {

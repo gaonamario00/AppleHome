@@ -62,7 +62,7 @@ body {
     background-color: #f2f2f2;
   }
   
-  .btn-editar, .btn-eliminar {
+  .btn-editar, .btn-eliminar, btn-quitar {
     padding: 5px 10px;
     margin-right: 5px;
     cursor: pointer;

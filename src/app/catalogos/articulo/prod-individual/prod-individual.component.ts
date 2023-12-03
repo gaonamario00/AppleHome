@@ -70,17 +70,16 @@ export class ProdIndividualComponent implements OnInit {
     const precioTotal = this.prodIndividualForms.value.precioInd;
 
     const prodInd: Producto = {
-      //idProd: this.productosInd.length+1,
+      idProd: this.productosInd.length+1,
       Nombre: nombre,
       Articulos: [],
-      PrecioTotal: precioTotal// Precio del artículo
+      PrecioTotal: precioTotal
     };
     //this.productosInd.push(prodInd);
     this._articuloIndService.guardarArticuloIndividual(prodInd).then(()=>{
       //console.log("Producto individual registrado");  
       this.toastr.success("Producto registrado con exito!");
       this.prodIndividualForms.reset();
-      
         }, error =>{
       //console.log(error);
       this.toastr.error("Ha ocurrido un error");
@@ -129,6 +128,11 @@ export class ProdIndividualComponent implements OnInit {
     }, error => {
       this.toastr.info("Ha ocurrido un error");
     });
+  }
+
+  cancelarEditar(){
+    this.id = undefined;
+    this.prodIndividualForms.reset()
   }
 
 }

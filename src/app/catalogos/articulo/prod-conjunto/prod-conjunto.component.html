@@ -11,9 +11,9 @@
       </div>
       <div>
         <label for="productoSeleccionado">Seleccionar Producto:</label>
-        <select id="productoSeleccionado" formControlName="productoSeleccionado">
+        <select id="productoSeleccionado" formControlName="productoSeleccionado" (change)="onProductoSeleccionado($event)">
             <option value="" disabled selected>Seleccione un artículo</option>
-          <option *ngFor="let p of productosInd" [value]="p.NombreArticulo">{{ p.NombreArticulo }}</option>
+          <option *ngFor="let p of productosInd" [value]="p.Nombre">{{ p.Nombre }}</option>
         </select>
         <div>
             <label for="cantidadInd">Cantidad: </label>
@@ -23,10 +23,10 @@
       </div>
       <div *ngIf="productosIndPre.length > 0">
         <div *ngFor="let p of productosIndPre">
-          <p>{{p.NombreArticulo }} | Cant: {{p.Cantidad}} | Quitar</p>
+          <p>{{p.NombreArticulo }} | Cant: {{p.Cantidad}} | <a (click)="eliminarProdIndPre(p)" class="btn-quitar">Quitar</a></p>
         </div>
       </div>
-      <button type="submit" (click)="guardarProductoConj()">Guardar</button>
+      <button type="submit" (click)="guardarProdConj()">Guardar</button>
     </form>
 
     <div *ngIf="productosConj.length > 0">
@@ -50,7 +50,7 @@
             <a class="btn-editar">Editar</a>
             
             <!-- Botón para eliminar -->
-            <a class="btn-eliminar">Eliminar</a>
+            <a (click)="eliminarProductoConj(p.id)" class="btn-eliminar">Eliminar</a>
           </td>
         </tr>
       </tbody>

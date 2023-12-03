@@ -1,0 +1,4 @@
+
+1. Validacion para evitar que un producto individual sea eliminado si forma parte de un producto conjunto
+2. Realizar el editar para el producto conjunto
+3. Diversas validaciones y toastr en Alta, Baja, update de las pantallas producto individual y producto conjunto
