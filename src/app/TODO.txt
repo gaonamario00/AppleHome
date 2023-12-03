@@ -3,3 +3,4 @@
 2. Realizar el editar para el producto conjunto
 3. Diversas validaciones y toastr en Alta, Baja, update de las pantallas producto individual y producto conjunto
 4. Ajustar fecha con date picker
+5. idprod para individuales

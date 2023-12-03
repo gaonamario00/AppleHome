@@ -58,6 +58,7 @@ export class ReportesComponent {
         this.productosAux = [...this.productosConj, ...ind];
         this.productos = this.productosAux;
         this.productos.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
+        console.log(this.productos);
       });
     });
   }
@@ -81,48 +82,62 @@ export class ReportesComponent {
   descargarPDF() {
     // Crear el documento PDF
     const doc = new jsPDF();
-  
-    // Obtener la fecha actual
-    const fechaActual = new Date().toLocaleDateString();
-  
-    // Configurar el encabezado de la fecha
-    doc.text(`Fecha de Emisión: ${fechaActual}`, 20, 10);
-  
+
+    const hoy = new Date();
+    const dia = hoy.getDate();
+    const mes = hoy.toLocaleString('es-ES', { month: 'long' });
+    const ano = hoy.getFullYear();
+    
+    const fechaActual = `${dia} de ${mes} de ${ano}`;
+    
     // Configurar el encabezado principal del reporte
     doc.text('Reporte de Ventas', 20, 20);
+
+    // Configurar el encabezado de la fecha
+    doc.setFontSize(10); // Tamaño de fuente más pequeño
+    doc.text(`Fecha de Emisión: ${fechaActual}`, 20, 30);
   
     // Configurar datos para la tabla
     const headers = ['Ticket', 'Nombre Persona', 'Total', 'Fecha', 'Productos'];
     const rows: (string | number)[][] = [];
-    
+  
     // Llenar datos de la tabla
     this.tickets.forEach((ticket, index) => {
-      if(ticket.Fechastr !== undefined){
+      if (ticket.Fechastr !== undefined && ticket.idTicket !== undefined) {
         const rowData: (string | number)[] = [
-          index + 1,
+          ticket.idTicket,
           ticket.NombrePersona,
           `$${ticket.Total}`,
           ticket.Fechastr,
           '' // Columna de Productos inicializada con cadena vacía
         ];
-      
+  
         // Agregar información detallada de los productos del ticket
         ticket.Articulos.forEach((articulo, i) => {
-          const producto = this.productos.find(p => p.idProd === articulo.idProducto);
-          if (producto) {
-            rowData[4] += `- ${articulo.Cantidad} x ${producto.Nombre}\n`; // Concatenar productos
-          }
+          //const producto = this.productos.find(p => p.idProd === articulo.idProducto);
+          //if (producto) {
+            rowData[4] += `- ${articulo.Cantidad} x ${articulo.NombreArticulo}\n`; // Concatenar productos
+          //}
         });
-      
+  
         // Agregar la fila al arreglo de filas
         rows.push(rowData);
       }
-
     });
-    
+  
+    // Calcular el total de los totales
+    const totalVentas = this.tickets.reduce((total, ticket) => total + Number(ticket.Total || 0), 0);
+    const totalRow: (string | number)[] = [
+      '', // Deja esta columna vacía
+      'Total', // Mueve "Total" a la columna de "Nombre Persona"
+      `$${totalVentas}`,
+      '',
+      ''
+    ];
+    rows.push(totalRow);
   
     // Configurar la posición y el estilo de la tabla
-    const startY = 30;
+    const startY = 35;
     const styles: Partial<Styles> = { valign: 'middle', halign: 'center' };
   
     // Agregar la tabla al documento
@@ -136,8 +151,6 @@ export class ReportesComponent {
     // Guardar el documento PDF
     doc.save('reporte_ventas.pdf');
   }
-  
-  
   
   
   

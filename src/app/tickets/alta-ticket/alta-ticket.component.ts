@@ -77,8 +77,6 @@ export class AltaTicketComponent {
     });
     const fecha = this.convertirStringToDateFormato(fechaSeleccionada1);
 
-    //console.log(fechaFormateada);
-
     const TICKET: Ticket = {
       idTicket: this.obtenerMayorId(this.tickets) + 1,
       NombrePersona: nombre,
@@ -87,17 +85,15 @@ export class AltaTicketComponent {
       Fecha: fecha,
       Fechastr: fechaFormateada
     };
-    //this.productosConj.push(prodConj);
+    console.log(this.productosPre);
     this._ticketService.guardarTicket(TICKET).then(()=>{
       this.productosPre = [];
       this.getProductos();
-      //console.log("Ticket registrado");  
       this.toastr.success("Ticket registrado con exito!");
       this.ticketForms.reset();
       this.ticketForms.get('productoSeleccionado')?.setValue("");
       this.ticketForms.get('TotalTicket')?.setValue("");
         }, error =>{
-      //console.log(error);
       this.toastr.error("Ha ocurrido un error");
     });
   }
@@ -122,26 +118,27 @@ export class AltaTicketComponent {
   }
 
   convertirStringToDateFormato(cadenaFecha: string): Date | undefined {
+    console.log('Cadena de fecha recibida:', cadenaFecha);
+
     const partes = cadenaFecha.split('/');
-    
-    if (partes.length !== 3) {
-      // La cadena no tiene el formato esperado
-      return undefined;
+  
+    if (partes.length === 3) {
+      const dia = parseInt(partes[0], 10);
+      const mes = parseInt(partes[1], 10) - 1; // Restamos 1 porque los meses comienzan desde 0
+      const anio = parseInt(partes[2], 10);
+  
+      console.log('Dia, mes, año:', dia, mes, anio);
+  
+      if (!isNaN(dia) && !isNaN(mes) && !isNaN(anio)) {
+        const fecha = new Date(anio, mes, dia);
+        console.log('Fecha creada:', fecha);
+        return fecha;
+      }
     }
   
-    const dia = parseInt(partes[0], 10);
-    const mes = parseInt(partes[1], 10) - 1; // Restamos 1 porque los meses comienzan desde 0
-    const anio = parseInt(partes[2], 10);
-  
-    if (isNaN(dia) || isNaN(mes) || isNaN(anio)) {
-      // Al menos una parte de la fecha no es un número válido
-      return undefined;
-    }
-  
-    // Crear un nuevo objeto Date con las partes de la fecha
-    const fechaParseada = new Date(anio, mes, dia);
-  
-    return fechaParseada;
+    // La cadena no tiene el formato esperado
+    console.log('Formato de fecha no válido');
+    return undefined;
   }
 
   convertirNgbDateStructADate(ngbDate: NgbDateStruct | undefined): Date | undefined {
@@ -154,7 +151,7 @@ export class AltaTicketComponent {
 
   onProdConjSeleccionado(event: any){
     const selectedProductName = event.target.value;
-    const selectedProduct = this.productosConj.find(p => p.Nombre === selectedProductName);
+    const selectedProduct = this.productos.find(p => p.Nombre === selectedProductName);
 
     if (selectedProduct) {
       const idProd = selectedProduct.idProd;
