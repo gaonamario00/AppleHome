@@ -19,11 +19,11 @@ export class ArticuloComponent {
   cambioTipoProducto(selected: number) {
     switch (selected) {
       case 1:
-        console.log("Producto individual");
+        //console.log("Producto individual");
         this.prodIndividual = true;
         break;
       case 2:
-        console.log("Producto conjunto");
+        //console.log("Producto conjunto");
         this.prodIndividual = false;
         break;
     }

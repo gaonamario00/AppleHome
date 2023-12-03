@@ -100,4 +100,12 @@ select option[disabled] {
   cursor: pointer;
   border-radius: 4px;
 }
-  
+
+/* ... otros estilos ... */
+
+.mat-datepicker-popup {
+  z-index: 9999;  /* o ajusta según sea necesario */
+}
+
+/* ... otros estilos ... */
+

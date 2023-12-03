@@ -25,6 +25,7 @@ export class ProdConjuntoComponent {
   productosInd: Producto[] = [];
   productosConj: Producto[] = [];
   productosAux: Producto[] = [];
+  productos: Producto[] = [];
   nombreInd: string = '';
   precioInd: number = 0;
   id: string | undefined;
@@ -62,7 +63,7 @@ export class ProdConjuntoComponent {
     const precioTotal = this.prodConjuntoForms.value.precioConj;
 
     const prodConj: Producto = {
-      idProd: this.productosConj.length + 1,
+      idProd: this.obtenerMayorId(this.productos)+1,
       Nombre: nombre,
       Articulos: this.productosIndPre,
       PrecioTotal: precioTotal
@@ -71,7 +72,7 @@ export class ProdConjuntoComponent {
     this._articuloConjService.guardarArticuloConjunto(prodConj).then(()=>{
       this.productosIndPre = [];
       this.getProductosIndividuales();
-      console.log("Producto Conjunto registrado");  
+      //console.log("Producto Conjunto registrado");  
       this.toastr.success("Producto registrado con exito!");
       this.prodConjuntoForms.reset();
       this.prodConjuntoForms.get('productoSeleccionado')?.setValue("");
@@ -89,7 +90,7 @@ export class ProdConjuntoComponent {
     if (selectedProduct) {
       const idProd = selectedProduct.idProd;
       this.idProd = idProd;
-      console.log('idProd seleccionado:', idProd);
+      //console.log('idProd seleccionado:', idProd);
     }
   }
 
@@ -99,7 +100,8 @@ export class ProdConjuntoComponent {
       //console.log(res);
       this.productosInd = res;
       this.productosAux = res;
-      console.log(this.productosAux)
+      //console.log(this.productosAux)
+      //console.log(this.obtenerMayorId(this.productosInd));
       this.productosInd.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
     });
   }
@@ -133,6 +135,8 @@ export class ProdConjuntoComponent {
     this._articuloConjService.listarProductosConjuntos().subscribe(res =>{
       //console.log(res);
       this.productosConj = res;
+      this.productos = [...res, ...this.productosAux];
+      //console.log(this.productos);
       this.productosConj.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
     });
   }
@@ -140,7 +144,7 @@ export class ProdConjuntoComponent {
   
   eliminarProductoConj(id: any): void {
     this._articuloConjService.eliminarProductoConjunto(id).then(() => {
-      console.log("Pruducto eliminado "+id);
+      //console.log("Pruducto eliminado "+id);
       //this.listarProdInd();
     }).catch(error => {
       console.error('Error al eliminar el producto:', error);
@@ -160,17 +164,32 @@ export class ProdConjuntoComponent {
 
 
   addPreToSelect(id: number){
-    console.log(id);
-    console.log(this.productosAux);
+    //console.log(id);
+    //console.log(this.productosAux);
     const productoEncontrado = this.productosAux.find(producto => producto.idProd === id);
-    console.log(productoEncontrado)
+   // console.log(productoEncontrado)
     if (productoEncontrado) {
       this.productosInd.push(productoEncontrado);
       this.productosInd.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
     }
   }
   
-
-
+  obtenerMayorId(lista: Producto[]): number {
+    if (lista.length === 0) {
+      // Manejar el caso de una lista vacía según sea necesario
+      return 0; // O lanzar un error, dependiendo de los requisitos
+    }
+  
+    // Utilizar la función reduce para encontrar el mayor id
+    const mayorId = lista.reduce((maxId, producto) => {
+      // Convertir la propiedad id a número si es una cadena
+      const id = typeof producto.idProd === 'string' ? parseInt(producto.idProd, 10) : producto.idProd;
+      return id !== undefined ? Math.max(maxId, id) : maxId;
+    }, typeof lista[0].idProd === 'string' ? parseInt(lista[0].idProd, 10) : lista[0].idProd || 0);
+  
+  
+    return mayorId;
+  }
+  
 }
 

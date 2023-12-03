@@ -28,19 +28,8 @@ export class ArticuloConjuntoService {
     return this.fireStore.collection('Conjuntos').doc(id).delete();
   }
 
-  getDocumento(documentId: string): Observable<Producto> {
-   /* return this.fireStore
-      .doc(`Conjuntos/${documentId}`)
-      .snapshotChanges()
-      .pipe(
-        map((doc) => doc.map(a => {
-          const data = a.payload.doc.data() as Producto;
-          const id = a.payload.doc.id;
-          return {id, ...data};
-      } 
-        )
-      ));
-      */
+  //No se usa
+  getProdConjunto(documentId: string): Observable<Producto> {
       const path = "Conjuntos/"+documentId;
       const docRef  = this.fireStore.collection("Conjuntos").doc(documentId);
       console.log(docRef);
@@ -52,7 +41,6 @@ export class ArticuloConjuntoService {
           return { id, ...data };
         })
       );
-
   }
 
 }

@@ -20,4 +20,6 @@ export interface Producto {
     NombrePersona: string;
     Articulos: Articulo[];
     Total: number;
+    Fecha?: Date;
+    Fechastr?: string;
   }

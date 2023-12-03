@@ -9,48 +9,51 @@
       <label for="precioTotalTicket">Precio Total:</label>
       <input id="precioTotalTicket" formControlName="precioTotalTicket" required>
     </div>
+    <app-date-picker (fechaSeleccionada)="capturarFecha($event)"></app-date-picker>
     <div>
       <label for="productoSeleccionado">Seleccionar Producto:</label>
       <select id="productoSeleccionado" formControlName="productoSeleccionado" (change)="onProdConjSeleccionado($event)">
           <option value="" disabled selected>Seleccione un artículo</option>
-        <option *ngFor="let p of productosConj" [value]="p.Nombre">{{ p.Nombre }}</option>
+        <option *ngFor="let p of productos" [value]="p.Nombre">{{ p.Nombre }}</option>
       </select>
       <div>
-          <label for="cantidadConj">Cantidad: </label>
-          <input id="cantidadConj" style="width: 100px;" formControlName="cantidadConj">
+          <label for="TotalTicket">Cantidad: </label>
+          <input id="TotalTicket" style="width: 100px;" formControlName="TotalTicket">
           <button class="btn plus" (click)="agregarProductoAListaPre()">Añadir +</button>
       </div>
     </div>
-    <div *ngIf="productosConjPre.length > 0">
-      <div *ngFor="let p of productosConjPre">
-        <p>{{p.NombreArticulo }} | Cant: {{p.Cantidad}} | <a (click)="eliminarProdConjPre(p)" class="btn-quitar">Quitar</a></p>
+    <div *ngIf="productosPre.length > 0">
+      <div *ngFor="let p of productosPre">
+        <p>{{p.NombreArticulo }} | Cant: {{p.Cantidad}} | <a (click)="eliminarProdPre(p)" class="btn-quitar">Quitar</a></p>
       </div>
     </div>
-    <button type="submit" (click)="guardarTicket()">Guardar</button>
+    <button type="submit" (click)="agregarTicket()">Guardar</button>
   </form>
 
-  <div *ngIf="productosConj.length > 0">
+  <div *ngIf="tickets.length > 0">
   <h2></h2>
-  <h2>Productos Conjuntos</h2>
+  <h2>Tickets</h2>
   <table class="productos-table">
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>Precio</th>
+        <th>Total</th>
+        <th>Fecha</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <!-- Iterar sobre la lista de productos -->
-      <tr *ngFor="let p of productosConj">
-        <td>{{ p.Nombre }}</td>
-        <td>{{ p.PrecioTotal }}</td>
+      <tr *ngFor="let t of tickets">
+        <td>{{ t.NombrePersona }}</td>
+        <td>$ {{ t.Total }}</td>
+        <td>{{ t.Fechastr}}</td>
         <td>
           <!-- Botón para editar -->
           <a class="btn-editar">Editar</a>
           
           <!-- Botón para eliminar -->
-          <a (click)="eliminarTicket(p.id)" class="btn-eliminar">Eliminar</a>
+          <a (click)="eliminarTicket(t.id)" class="btn-eliminar">Eliminar</a>
         </td>
       </tr>
     </tbody>
