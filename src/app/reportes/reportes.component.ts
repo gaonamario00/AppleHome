@@ -50,7 +50,6 @@ export class ReportesComponent {
 
   getProductos(){
     this._articuloConjService.listarProductosConjuntos().subscribe(conj =>{
-      console.log(conj);
       this.productosConj = conj;
       this.productosAux = conj;
       //console.log(this.productosAux)
@@ -58,14 +57,12 @@ export class ReportesComponent {
         this.productosAux = [...this.productosConj, ...ind];
         this.productos = this.productosAux;
         this.productos.sort((a, b) => a.Nombre.localeCompare(b.Nombre));
-        console.log(this.productos);
       });
     });
   }
 
   getTickets(){
     this._ticketService.listarTickets().subscribe(res =>{
-      console.log(res);
       this.tickets = res;
       //this.calcularTotalVentas();
       //console.log(this.productos);
@@ -76,7 +73,6 @@ export class ReportesComponent {
   
   calcularTotalVentas() {
     this.totalVentas = this.tickets.reduce((total, ticket) => total + Number(ticket.Total || 0), 0);
-    console.log(this.totalVentas);
   }
 
   descargarPDF() {
@@ -98,7 +94,7 @@ export class ReportesComponent {
     doc.text(`Fecha de Emisión: ${fechaActual}`, 20, 30);
   
     // Configurar datos para la tabla
-    const headers = ['Ticket', 'Nombre Persona', 'Total', 'Fecha', 'Productos'];
+    const headers = ['No. Ticket', 'Nombre Cliente', 'Costo', 'Fecha', 'Productos'];
     const rows: (string | number)[][] = [];
   
     // Llenar datos de la tabla
