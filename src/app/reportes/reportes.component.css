@@ -1,0 +1,5 @@
+.card:hover {
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil al pasar por encima */
+    transform: scale(1.05); /* Agranda ligeramente el card al pasar por encima */
+  }

@@ -1,15 +1,24 @@
-<div>
-    <div class="mb-2">
-      <label for="datepicker" class="form-label">Selecciona una fecha:</label>
-      <div class="input-group">
-        <input id="datepicker" class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dp="ngbDatepicker"
-       [(ngModel)]="model" [ngModelOptions]="{standalone: true}" (ngModelChange)="onModelChange()">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button">
-            <i><img class="icono" src="../../../../assets/imagenes/calendario.png"></i>
-          </button>
+<!-- <div class="container"> -->
+  <div class="row">
+    <div>
+      <div class="mb-3">
+        <label for="datepicker" class="form-label">Selecciona una fecha:</label>
+        <div class="input-group">
+          <input id="datepicker" style="height: 40px !important; width: 80%;" class="form-control" placeholder="yyyy-mm-dd"
+            ngbDatepicker #dp="ngbDatepicker" [(ngModel)]="model" [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="onModelChange()">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="dp.toggle()" type="button">
+              <i><img class="icono" src="../../../../assets/imagenes/calendario.png" alt="Calendario" style="max-width: 24px; max-height: 24px;"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <button class="hoy" (click)="selectToday()">Seleccionar Hoy</button>
   </div>
+  <div class="row">
+    <div>
+      <button class="btn btn-primary hoy" (click)="selectToday()">Seleccionar Hoy</button>
+    </div>
+  </div>
+<!-- </div> -->

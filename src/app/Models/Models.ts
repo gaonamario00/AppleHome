@@ -5,6 +5,7 @@ export interface Producto {
     Nombre: string;
     Articulos: Articulo[];
     PrecioTotal: number;
+    idUser?: number;
   }
   
   export interface Articulo {
@@ -12,6 +13,7 @@ export interface Producto {
     Cantidad: number;
     idProducto?: number;
     id?: string;
+    idUser?: number;
   }
   
   export interface Ticket {
@@ -22,4 +24,5 @@ export interface Producto {
     Total: number;
     Fecha?: Date;
     Fechastr?: string;
+    idUser?: number;
   }

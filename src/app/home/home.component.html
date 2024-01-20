@@ -1,32 +1,51 @@
-<!-- app.component.html -->
-
-<div class="list-group">
-
-  <a (click)="navigateToTickets()" class="list-group-item list-group-item-action mb-3">
-    <div class="card text-white bg-primary">
-      <div class="card-body">
-        <h5 class="card-title">Tickets</h5>
-        <p class="card-text">Gestión de Tickets</p>
-      </div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <a (click)="navigateToTickets()" class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <div class="d-flex align-items-center"> <!-- Agregado un contenedor flex para alinear elementos verticalmente -->
+            <div class="col-md-4">
+              <img src="../../assets/imagenes/receipt-cutoff.svg" class="img-fluid" style="width: 60px; height: 60px; filter: invert(100%);">
+            </div>
+            <div class="col-md-8">
+              <h5 class="card-title">Tickets</h5>
+              <p class="card-text">Gestión de Tickets</p>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
-  </a>
 
-  <a (click)="navigateToReportes()" class="list-group-item list-group-item-action mb-3">
-    <div class="card text-white bg-primary">
-      <div class="card-body">
-        <h5 class="card-title">Reportes</h5>
-        <p class="card-text">Generación de Reportes</p>
-      </div>
+    <div class="col-md-4">
+      <a (click)="navigateToReportes()" class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="col-md-4">
+              <img src="../../assets/imagenes/bar-chart-line.svg" class="img-fluid" style="width: 60px; height: 60px; filter: invert(100%);">
+            </div>
+            <div class="col-md-8">
+              <h5 class="card-title">Reportes</h5>
+              <p class="card-text">Generación de Reportes</p>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
-  </a>
 
-  <a (click)="navigateToArticulo()" class="list-group-item list-group-item-action">
-    <div class="card text-white bg-primary">
-      <div class="card-body">
-        <h5 class="card-title">Catálogos</h5>
-        <p class="card-text">Gestión de Catálogos</p>
-      </div>
+    <div class="col-md-4">
+      <a (click)="navigateToArticulo()" class="card text-white bg-primary">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="col-md-4">
+              <img src="../../assets/imagenes/bag-check.svg" class="img-fluid" style="width: 60px; height: 60px; filter: invert(100%);">
+            </div>
+            <div class="col-md-8">
+              <h5 class="card-title">Catálogos</h5>
+              <p class="card-text">Gestión de Catálogos</p>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
-  </a>
-
+  </div>
 </div>
